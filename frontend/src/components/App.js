@@ -1,11 +1,25 @@
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import Navbar from './Navbar';
+import NoteList from './NoteList';
 
 function App() {
   return (
-    <div>
-      <header>
-        <h1>Note taking app</h1>
-      </header>
-    </div>
+    <Router>
+      <main>
+        <header>
+          <Navbar />
+        </header>
+        <Switch>
+          <Route path="/">
+            <NoteList />
+          </Route>
+        </Switch>
+      </main>
+    </Router>
   );
 }
 
