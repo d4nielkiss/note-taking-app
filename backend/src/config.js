@@ -6,4 +6,5 @@ export const config = {
   app: {
     port: process.env.PORT,
   },
+  dbConnection: process.env.MONGO_URL,
 };
