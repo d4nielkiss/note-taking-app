@@ -3,6 +3,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import CreateNote from './CreateNote';
 import Navbar from './Navbar';
 import NoteList from './NoteList';
 
@@ -14,6 +15,9 @@ function App() {
           <Navbar />
         </header>
         <Switch>
+          <Route path="/new">
+            <CreateNote />
+          </Route>
           <Route path="/">
             <NoteList />
           </Route>
