@@ -22,7 +22,7 @@ function App() {
             <CreateNote backend={backend} />
           </Route>
           <Route path="/">
-            <NoteList />
+            <NoteList backend={backend} />
           </Route>
         </Switch>
       </main>

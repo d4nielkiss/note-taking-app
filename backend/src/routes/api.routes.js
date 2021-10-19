@@ -8,6 +8,6 @@ router.use(cors());
 router.use(express.json());
 
 router.post('/note', noteController.apiCreateNote);
-router.get('note', noteController.apiGetNotes);
+router.get('/note', noteController.apiGetNotes);
 
 export default router;

@@ -96,7 +96,7 @@ export default function Form({ backend }) {
         mode: 'cors',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application-json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           title: data.title,
@@ -108,9 +108,6 @@ export default function Form({ backend }) {
             const response = await res.json();
             throw new Error(response?.error);
           }
-          return res.json();
-        })
-        .then(res => {
           e.target.reset();
           setData({
             title: '',
@@ -180,7 +177,7 @@ export default function Form({ backend }) {
       </form>
       {formAlertText &&
         <div className={`alert alert-${formAlertType}`} role="alert">
-          ${formAlertText}
+          {formAlertText}
         </div>
       }
     </>
