@@ -20,4 +20,16 @@ export const noteService = {
       return { status: 500, error: err };
     }
   },
+  async getNotes() {
+    try {
+      const notes = await Note.find();
+      if (notes.length === 0) {
+        return { status: 400, error: 'Zero note' }
+      }
+      return { status: 200, notes };
+    } catch (err) {
+      console.error(err.message);
+      return { status: 500, error: err };
+    }
+  },
 };
