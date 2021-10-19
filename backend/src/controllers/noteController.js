@@ -1,4 +1,4 @@
-import noteService from '../services/noteService';
+import { noteService } from '../services/noteService';
 
 export const noteController = {
   async apiCreateNote(req, res) {
