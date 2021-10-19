@@ -6,8 +6,11 @@ import {
 import CreateNote from './CreateNote';
 import Navbar from './Navbar';
 import NoteList from './NoteList';
+import config from '../config';
 
 function App() {
+  const backend = `${config.protocol}://${config.host}:${config.port}/${config.route}`;
+
   return (
     <Router>
       <main>
@@ -16,7 +19,7 @@ function App() {
         </header>
         <Switch>
           <Route path="/new">
-            <CreateNote />
+            <CreateNote backend={backend} />
           </Route>
           <Route path="/">
             <NoteList />

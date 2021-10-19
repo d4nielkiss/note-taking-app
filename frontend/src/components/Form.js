@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-export default function Form() {
+export default function Form({ backend }) {
   const [data, setData] = useState({
     title: '',
     description: '',
@@ -11,7 +11,8 @@ export default function Form() {
     description: '',
   });
 
-  const [success, setSuccess] = useState(false);
+  const [formAlertText, setFormAlertText] = useState('');
+  const [formAlertType, setFormAlertType] = useState('');
   const [isFormValidated, setIsFormValidated] = useState(false);
 
   const errorMessages = {
@@ -90,14 +91,42 @@ export default function Form() {
     e.preventDefault();
     const isFormValid = validateForm();
     if (isFormValid) {
-      setSuccess(true);
-      e.target.reset();
-      setData({
-        title: '',
-        description: '',
-      });
-      setIsFormValidated(false)
+      fetch(`${backend}/note`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application-json',
+        },
+        body: JSON.stringify({
+          title: data.title,
+          description: data.description,
+        }),
+      })
+        .then(async res => {
+          if (res.status === 400) {
+            const response = await res.json();
+            throw new Error(response?.error);
+          }
+          return res.json();
+        })
+        .then(res => {
+          e.target.reset();
+          setData({
+            title: '',
+            description: '',
+          });
+          setFormAlertText('Note saved successfully');
+          setFormAlertType('success');
+        })
+        .catch(error => {
+          setIsFormValidated(false);
+          setFormAlertText(error.message);
+          setFormAlertType('danger');
+        })      
     }
+    setFormAlertText('');
+    setFormAlertType('');
   }
 
   return (
@@ -149,9 +178,9 @@ export default function Form() {
           <button className="btn btn-primary" type="submit">Submit</button>
         </div>
       </form>
-      {success &&
-        <div className="alert alert-success" role="alert">
-          Note saved successfully!
+      {formAlertText &&
+        <div className={`alert alert-${formAlertType}`} role="alert">
+          ${formAlertText}
         </div>
       }
     </>
