@@ -6,12 +6,17 @@
   padding: 0;
   box-sizing: border-box;
 
-  h1 {
-    font-family: 'Caveat', cursive;
-  }
+  body {
+    background-image: url('../img/cork-board.png');
 
-  nav {
-    background: rgb(48,127,218);
-    background: linear-gradient(90deg, rgba(48,127,218,1) 58%, rgba(0,183,255,1) 100%);
+    h1, h2, h3 {
+      font-family: 'Caveat', cursive;
+    }
+  
+    nav {
+      padding: 0 2rem;
+      background: rgb(48,127,218);
+      background: linear-gradient(90deg, rgba(48,127,218,1) 58%, rgba(0,183,255,1) 100%);
+    }
   }
 }

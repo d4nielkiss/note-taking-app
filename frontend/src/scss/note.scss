@@ -1,0 +1,13 @@
+.Note {
+  margin: 3rem;
+  padding: 2rem;
+  background-color: rgb(245, 239, 229);
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+
+  h3, h2 {
+    color: rgba(48,127,218,1);
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+}

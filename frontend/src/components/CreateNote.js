@@ -1,10 +1,11 @@
 import Form from './Form';
+import '../scss/note.scss';
 
 export default function CreateNote({ backend }) {
   return (
-    <div className="CreateNote">
+    <div className="Note">
       <h2>
-        New Note
+        Add a new note
       </h2>
       <div>
         <Form backend={backend} />

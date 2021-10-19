@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import Note from './Note';
 
 export default function NoteList({ backend }) {
   const [notes, setNotes] = useState([]);
@@ -23,14 +23,10 @@ export default function NoteList({ backend }) {
 
   return (
     <div className="NoteList">
-      <h2>Note list</h2>
       {notes && 
         notes.map(note => {
           return (
-            <div>
-              <h3>{note.title}</h3>
-              <article>{note.description}</article>
-            </div>
+            <Note title={note.title} description={note.description} />
           )
         })
       }
