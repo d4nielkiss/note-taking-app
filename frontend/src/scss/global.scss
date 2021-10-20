@@ -1,5 +1,6 @@
 @import '~bootstrap/scss/bootstrap.scss';
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 * {
   margin: 0;
@@ -8,6 +9,7 @@
 
   body {
     background-image: url('../img/cork-board.png');
+    font-family: 'Lato', sans-serif;
 
     h1, h2, h3 {
       font-family: 'Caveat', cursive;
@@ -17,6 +19,7 @@
       padding: 0 2rem;
       background: rgb(48,127,218);
       background: linear-gradient(90deg, rgba(48,127,218,1) 58%, rgba(0,183,255,1) 100%);
+      border-bottom: 3px solid gray;
     }
   }
 }

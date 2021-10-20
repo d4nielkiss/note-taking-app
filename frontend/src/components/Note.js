@@ -1,8 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbtack } from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
 import '../scss/note.scss';
 
-export default function Note({ title, description }) {
+export default function Note({
+  title,
+  description,
+  date,
+  isPinned,
+}) {
+  const dateTime = moment(date).format('MMMM Do YYYY, h:mm:ss a')
+
   return (
     <div className="Note">
       <div className="d-flex justify-content-between">
@@ -11,6 +19,7 @@ export default function Note({ title, description }) {
       </div>
       <hr/>
       <article>{description}</article>
+      <small>{dateTime}</small>
     </div>
   );
 };

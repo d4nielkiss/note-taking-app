@@ -11,6 +11,12 @@ export default function validateNote(data) {
       'string.empty': 'Missing description',
       'string.max': 'Cannot be longer than 200 characters',
     }),
+    date: Joi.date().required().messages({
+      'any.required': 'Missing date',
+    }),
+    isPinned: Joi.boolean().required().messages({
+      'any.required': 'Missing isPinned',
+    })
   });
   return schema.validate(data, { abortEarly: false });
 }

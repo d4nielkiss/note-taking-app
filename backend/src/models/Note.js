@@ -10,6 +10,14 @@ const noteSchema = new mongoose.Schema({
     required: true,
     maxlength: 200,
   },
+  date: {
+    type: Date,
+    required: true,
+  },
+  isPinned: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 export default mongoose.model('Note', noteSchema);

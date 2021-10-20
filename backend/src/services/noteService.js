@@ -12,6 +12,8 @@ export const noteService = {
       const note = await new Note({
         title: data.title,
         description: data.description,
+        date: data.date,
+        isPinned: data.isPinned,
       });
       await note.save();
       return { status: 204 };

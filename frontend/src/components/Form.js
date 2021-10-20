@@ -101,6 +101,8 @@ export default function Form({ backend }) {
         body: JSON.stringify({
           title: data.title,
           description: data.description,
+          date: new Date(),
+          isPinned: false,
         }),
       })
         .then(async res => {
