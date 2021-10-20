@@ -9,4 +9,16 @@
     color: rgba(48,127,218,1);
     font-weight: bold;
   }
+
+  article{
+    margin-bottom: 2rem;
+  }
+
+  small {
+    color: rgb(180, 180, 180);
+  }
+
+  &-isPinned {
+    border: 3px solid rgba(48,127,218,1);
+  }
 }

@@ -24,7 +24,7 @@ export const noteService = {
   },
   async getNotes() {
     try {
-      const notes = await Note.find();
+      const notes = await Note.find().sort({'isPinned': -1, 'date': -1});
       if (notes.length === 0) {
         return { status: 400, error: 'Zero note' }
       }

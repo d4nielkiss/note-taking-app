@@ -8,14 +8,20 @@ export default function Note({
   description,
   date,
   isPinned,
+  id,
 }) {
   const dateTime = moment(date).format('MMMM Do YYYY, h:mm:ss a')
 
   return (
-    <div className="Note">
+    <div className={isPinned ? `Note-isPinned Note` : `Note`}>
       <div className="d-flex justify-content-between">
         <h3>{title}</h3>
-        <FontAwesomeIcon icon={faThumbtack} size="2x" color="gray" />
+        <FontAwesomeIcon
+          data-id={id}
+          icon={faThumbtack}
+          size="2x"
+          color={isPinned ? `rgba(48,127,218,1)` : `rgb(180, 180, 180`}
+        />
       </div>
       <hr/>
       <article>{description}</article>

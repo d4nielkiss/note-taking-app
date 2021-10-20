@@ -21,14 +21,14 @@ export default function NoteList({ backend }) {
       });
   }, [backend]);
 
-  console.log(notes);
-
   return (
     <div className="NoteList">
       {notes && 
         notes.map(note => {
           return (
             <Note
+              key={note._id}
+              id={note._id}
               title={note.title}
               description={note.description}
               date={note.date}
