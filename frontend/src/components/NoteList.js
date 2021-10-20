@@ -5,7 +5,7 @@ export default function NoteList({ backend }) {
   const [notes, setNotes] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  function fetchNoteQuery() {
     fetch(`${backend}/note`)
       .then(res => {
         if (res.ok) {
@@ -19,7 +19,37 @@ export default function NoteList({ backend }) {
       .catch(err => {
         setError(err.message);
       });
-  }, [backend]);
+  }
+
+  useEffect(() => {
+    fetchNoteQuery();
+  }, []);
+
+  function fetchIsPinnedChange(status, id) {
+    fetch(`${backend}/note/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        isPinned: status,
+      }),
+    })
+      .then(response => {
+        response.json();
+        fetchNoteQuery();
+      })
+      .catch(err => {
+        setError(err.message);
+      });
+  }
+
+  function handleThumbtackClick(e) {
+    const id = e.target.dataset.id;
+    const pinnedToUpdate = !e.target.dataset.isPinned;
+    fetchIsPinnedChange(pinnedToUpdate, id);
+  }
 
   return (
     <div className="NoteList">
@@ -33,6 +63,7 @@ export default function NoteList({ backend }) {
               description={note.description}
               date={note.date}
               isPinned={note.isPinned}
+              handleThumbtackClick={handleThumbtackClick}
             />
           )
         })
