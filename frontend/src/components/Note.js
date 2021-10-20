@@ -18,9 +18,10 @@ export default function Note({
       <div className="d-flex justify-content-between">
         <h3>{title}</h3>
         <FontAwesomeIcon
+          cursor="pointer"
           onClick={handleThumbtackClick}
           data-id={id}
-          data-isPinned={isPinned}
+          data-ispinned={isPinned}
           icon={faThumbtack}
           size="2x"
           color={isPinned ? `rgba(48,127,218,1)` : `rgb(180, 180, 180`}

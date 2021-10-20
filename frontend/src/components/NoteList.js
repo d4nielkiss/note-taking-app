@@ -22,8 +22,20 @@ export default function NoteList({ backend }) {
   }
 
   useEffect(() => {
-    fetchNoteQuery();
-  }, []);
+    fetch(`${backend}/note`)
+        .then(res => {
+          if (res.ok) {
+            return res.json();
+          }
+          throw res;
+        })
+        .then(data => {
+          setNotes(data.notes)
+        })
+        .catch(err => {
+          setError(err.message);
+        });
+  }, [backend]);
 
   function fetchIsPinnedChange(status, id) {
     fetch(`${backend}/note/${id}`, {
@@ -46,9 +58,12 @@ export default function NoteList({ backend }) {
   }
 
   function handleThumbtackClick(e) {
-    const id = e.target.dataset.id;
-    const pinnedToUpdate = !e.target.dataset.isPinned;
-    fetchIsPinnedChange(pinnedToUpdate, id);
+    const id = e.currentTarget.dataset.id;
+    let pinnedUpdateTo = false;
+    if (e.currentTarget.dataset.ispinned === 'false') {
+      pinnedUpdateTo = true;
+    }
+    fetchIsPinnedChange(pinnedUpdateTo, id);
   }
 
   return (
