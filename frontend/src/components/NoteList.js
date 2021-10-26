@@ -67,7 +67,7 @@ export default function NoteList({ backend }) {
   }
 
   return (
-    <div className="NoteList">
+    <div className="NoteList d-flex align-items-center flex-column">
       {notes && 
         notes.map(note => {
           return (

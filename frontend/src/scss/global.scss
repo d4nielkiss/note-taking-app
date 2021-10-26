@@ -22,6 +22,10 @@
       background: $darkBlue;
       background: linear-gradient(90deg, $darkBlue 58%, $lightBlue 100%);
       border-bottom: 3px solid $gray;
+
+      .Navbar-row {
+        max-width: 1200px;
+      }
     }
   }
 }

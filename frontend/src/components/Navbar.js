@@ -4,7 +4,7 @@ import AddSign from './AddSign';
 export default function Navbar() {
     return (
         <nav className="navbar navbar-dark">
-            <div className="container-fluid">
+            <div className="container-fluid Navbar-row">
                 <Link className="navbar-brand" to="/">
                     <h1>Note taking app</h1>
                 </Link>
