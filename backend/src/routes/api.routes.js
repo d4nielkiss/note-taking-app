@@ -11,4 +11,6 @@ router.post('/note', noteController.apiCreateNote);
 router.get('/note', noteController.apiGetNotes);
 router.put('/note/:id', noteController.apiUpdateNote);
 
+router.post('/register', userController.apiCreateUser);
+
 export default router;
