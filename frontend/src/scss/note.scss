@@ -1,19 +1,6 @@
 @import './colors';
 
 .Note {
-  margin: 3rem;
-  padding: 2rem;
-  width: 80%;
-  max-width: 900px;
-  background-color: $paleYellow;
-  border-radius: 1rem;
-  box-shadow: $shadow 0px 20px 30px;
-
-  h3, h2 {
-    color: $darkBlue;
-    font-weight: bold;
-  }
-
   article{
     margin-bottom: 2rem;
   }

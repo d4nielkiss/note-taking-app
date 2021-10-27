@@ -14,7 +14,7 @@ export default function Note({
   const dateTime = moment(date).format('MMMM Do YYYY, h:mm:ss a');
 
   return (
-    <div className={isPinned ? `Note-isPinned Note` : `Note`}>
+    <div className={isPinned ? `Note-isPinned Note box` : `Note box`}>
       <div className="d-flex justify-content-between">
         <h3>{title}</h3>
         <FontAwesomeIcon
