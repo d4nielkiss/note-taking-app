@@ -1,4 +1,4 @@
-import Form from './Form';
+import Form from './common/Form';
 import '../scss/note.scss';
 
 export default function CreateNote({ backend }) {

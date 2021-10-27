@@ -6,6 +6,7 @@ import {
 import CreateNote from './CreateNote';
 import Navbar from './Navbar';
 import NoteList from './NoteList';
+import Register from '../components/auth/Register';
 import config from '../config';
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
           <Navbar />
         </header>
         <Switch>
+          <Route path="/register">
+            <Register />
+          </Route>
           <Route path="/new">
             <CreateNote backend={backend} />
           </Route>
