@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
+import validator from 'validator';
 import InputFieldSet from './InputFieldSet';
 
-export default function Form({ backend, type }) {
+export default function AuthForm({ backend, type }) {
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -18,8 +19,39 @@ export default function Form({ backend, type }) {
 
   const errorMessages = {
     required: 'Please fill the field above!',
-    email: 'Invalid email format!',
-    password: 'Password must be at least 8 characters long!',
+    format: 'Invalid email format!',
+    length: 'Password must be at least 8 characters long!',
+  }
+
+  const references = {
+    email: useRef(),
+    password: useRef(),
+  }
+
+  function isNotEmpty(value) {
+    return value.length > 0;
+  }
+
+  function isValidEmail(value) {
+    return validator.isEmail(value);
+  }
+
+  function isLongEnough(value) {
+    return validator.isLength(value, {
+      min: 8,
+      max: undefined,
+    });
+  }
+
+  const validations = {
+    email: {
+      required: isNotEmpty,
+      format: isValidEmail,
+    },
+    password: {
+      required: isNotEmpty,
+      length: isLongEnough,
+    },
   }
 
   function handleInputChange(e) {
@@ -34,31 +66,18 @@ export default function Form({ backend, type }) {
     });
   }
 
-  const validations = {
-    email: {
-      required: isNotEmpty,
-    },
-    password: {
-      required: isNotEmpty,
-    },
-  }
-
-  const references = {
-    email: useRef(),
-    password: useRef(),
-  }
-
-  function isNotEmpty(value) {
-    return value.length > 0;
-  }
-
   function validateInputField(name) {
     const value = data[name];
     let isFieldValid = true;
+    setErrors(previousErrors => ({
+      ...previousErrors,
+      [name]: '',
+    }));
     references[name].current.setCustomValidity('');
+
     if (validations[name] !== undefined) {
       for (const [validity, validationFn] of Object.entries(validations[name])) {
-        if (isFieldValid) {
+        if (isFieldValid !== false) {
           isFieldValid = validationFn(value);
         }
         if (!isFieldValid) {
@@ -68,6 +87,7 @@ export default function Form({ backend, type }) {
             [name]: errorMessage,
           }));
           references[name].current.setCustomValidity(errorMessage);
+          return isFieldValid;
         }
       }
     }
@@ -79,15 +99,15 @@ export default function Form({ backend, type }) {
   }
 
   function validateForm() {
-    let isFormValid = true;
-    setIsFormValidated(true);
-    for (const inputField of Object.keys(data)) {
-      let isInputValid = validateInputField(inputField);
-      if (!isInputValid) {
-        isFormValid = false;
+    let isValid = true;
+
+    for (const fieldName of Object.keys(data)) {
+      const isFieldValid = validateInputField(fieldName);
+      if (!isFieldValid) {
+        isValid = false;
       }
     }
-    return isFormValid;
+    return isValid;
   }
 
   function handleFormSubmit(e) {
@@ -123,6 +143,7 @@ export default function Form({ backend, type }) {
           setFormAlertType('danger');
         }) 
     }
+    setIsFormValidated(true);
     setFormAlertText('');
     setFormAlertType('');
   }
@@ -156,7 +177,7 @@ export default function Form({ backend, type }) {
           handleInputChange={handleInputChange}
           required
         />
-        <button className="mb-5 mt-3" type="submit">
+        <button className="btn btn-primary mb-5 mt-3" type="submit">
           Submit
         </button>
         <p>* Password must be at least 8 characters long</p>

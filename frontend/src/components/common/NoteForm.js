@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-export default function Form({ backend }) {
+export default function NoteForm({ backend }) {
   const [data, setData] = useState({
     title: '',
     description: '',

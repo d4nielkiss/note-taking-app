@@ -8,7 +8,6 @@ export default function InputFieldSet({
   labelText,
   required,
   reference,
-  readOnly,
   min,
   max,
   textarea,
@@ -35,7 +34,6 @@ export default function InputFieldSet({
       )}
       {!textarea && (
         <input
-          readOnly={readOnly}
           type={type}
           className="form-control"
           id={name}

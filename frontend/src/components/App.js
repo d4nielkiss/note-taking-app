@@ -18,10 +18,10 @@ function App() {
       <main>
         <Switch>
           <Route path="/register">
-            <Register />
+            <Register backend={backend} />
           </Route>
           <Route path="/login">
-            <Login />
+            <Login backend={backend} />
           </Route>
           <Route path="/new">
             <CreateNote backend={backend} />
