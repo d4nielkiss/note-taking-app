@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { noteController } from '../controllers/noteController';
+import { noteController, userController } from '../controllers';
 
 const router = express.Router();
 
