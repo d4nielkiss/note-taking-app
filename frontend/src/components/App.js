@@ -4,10 +4,10 @@ import {
   Route,
 } from "react-router-dom";
 import CreateNote from './CreateNote';
-import Navbar from './Navbar';
 import NoteList from './NoteList';
 import Register from '../components/auth/Register';
 import Login from '../components/auth/Login';
+import Home from './Home';
 import config from '../config';
 
 function App() {
@@ -16,9 +16,6 @@ function App() {
   return (
     <Router>
       <main>
-        <header>
-          <Navbar />
-        </header>
         <Switch>
           <Route path="/register">
             <Register />
@@ -29,8 +26,11 @@ function App() {
           <Route path="/new">
             <CreateNote backend={backend} />
           </Route>
-          <Route path="/">
+          <Route path="/dashboard">
             <NoteList backend={backend} />
+          </Route>
+          <Route path="/">
+            <Home />
           </Route>
         </Switch>
       </main>
