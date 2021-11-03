@@ -7,4 +7,5 @@ export const config = {
     port: process.env.PORT,
   },
   dbConnection: process.env.MONGO_URL,
+  token: process.env.TOKEN,
 };

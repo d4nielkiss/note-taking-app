@@ -1,6 +1,8 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import User from '../models/User';
 import validateUser from '../utils/validateUser';
+import { config } from '../config';
 
 export const userService = {
   async createUser(data) {
@@ -29,4 +31,42 @@ export const userService = {
       return { status: 500, error: err };
     }
   },
+  async loginUser(data) {
+    try {
+      const { error } = validateUser(data);
+      if (error) {
+        return { status: 400, error: error.details[0].message };
+      }
+
+      const user = await User.findOne({ email: data.email });
+      if (!user) {
+        return { status: 400, error: `No user found with this email` };
+      }
+
+      const validPassword = await bcrypt.compare(data.password, user.password);
+      if (!validPassword) {
+        return { status: 400, error: 'Invalid password' };
+      }
+
+      const token = jwt.sign(
+        { email: user.email },
+        config.token,
+        {
+          expiresIn: '1day',
+        }
+      );
+
+      return {
+        status: 200,
+        user: {
+          id: user._id,
+          email: user.email,
+          token,
+        },
+      };
+    } catch (err) {
+      console.error(err.message);
+      return { status: 500, error: err };
+    }
+  }
 }
