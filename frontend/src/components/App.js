@@ -11,6 +11,7 @@ import Login from '../components/auth/Login';
 import Home from './Home';
 import config from '../config';
 import { useState } from 'react';
+import Navbar from './Navbar';
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -24,6 +25,14 @@ function App() {
     }
   }
 
+  function handleSignOut() {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      localStorage.removeItem('user');
+      setUser(null);
+    }
+  }
+
   const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
   const backend = `${config.protocol}://${config.host}:${config.port}/${config.route}`;
 
@@ -31,9 +40,13 @@ function App() {
   return (
     <Router>
       <main>
+        {user ?
+          <Navbar user={user} /> :
+          ''
+        }
         <Switch>
           <Route path="/register">
-            { isRegisterSuccess ?
+            {isRegisterSuccess ?
               <Redirect to="/login" /> :
               <Register
                 backend={backend}
@@ -42,7 +55,7 @@ function App() {
             }
           </Route>
           <Route path="/login">
-            { user ?
+            {user ?
               <Redirect to="/" /> :
               <Login
                 backend={backend}
@@ -57,7 +70,10 @@ function App() {
             <NoteList backend={backend} />
           </Route>
           <Route path="/">
-            <Home user={user} /> 
+            {user ? 
+              <NoteList backend={backend} user={user} /> :
+              <Home user={user} handleSignOut={handleSignOut} />
+            }
           </Route>
         </Switch>
       </main>

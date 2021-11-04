@@ -3,14 +3,20 @@ import { faCheck, faListUl, faStickyNote, faThumbtack } from '@fortawesome/free-
 import { Link } from 'react-router-dom';
 import '../scss/home.scss';
 
-export default function Home({ user }) {
+export default function Home({ user, handleSignOut }) {
   return (
     <div className="Home">
       
       <header className="box">
       {user && (
-        <div className="action-line">
-          <Link to="/dashboard">Take me to my notes!</Link>
+        <div className="action-line-auth">
+          <Link to="/dashboard">My notes</Link>
+          <button
+            onClick={handleSignOut}
+            className="sign-out"
+          >
+            Sign out
+          </button>
         </div>
       )}
       {!user && (

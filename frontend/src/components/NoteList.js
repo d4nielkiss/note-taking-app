@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Note from './Note';
 
-export default function NoteList({ backend }) {
+export default function NoteList({ backend, user }) {
   const [notes, setNotes] = useState([]);
   const [error, setError] = useState(null);
 
