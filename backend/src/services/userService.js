@@ -25,7 +25,7 @@ export const userService = {
         password: hashedPassword,
       });
       await user.save();
-      return { status: 204 };
+      return { status: 200, message: 'User created successfully' };
     } catch (err) {
       console.error(err.message);
       return { status: 500, error: err };
