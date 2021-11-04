@@ -2,7 +2,12 @@ import { useRef, useState } from 'react';
 import validator from 'validator';
 import InputFieldSet from './InputFieldSet';
 
-export default function AuthForm({ backend, type }) {
+export default function AuthForm({
+  backend,
+  type,
+  setIsRegisterSuccess,
+  setUser,
+}) {
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -131,11 +136,20 @@ export default function AuthForm({ backend, type }) {
             const response = await res.json();
             throw new Error(response?.error);
           }
+          return res.json();
+        })
+        .then(res => {
           e.target.reset();
           setData({
             email: '',
             password: '',
           });
+          if (type === 'register') {
+            setIsRegisterSuccess(true);
+          } else {
+            localStorage.setItem('user', JSON.stringify(res.user));
+            setUser(res.user);
+          }
         })
         .catch(error => {
           setIsFormValidated(false);
