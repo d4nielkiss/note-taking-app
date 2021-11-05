@@ -41,7 +41,7 @@ function App() {
     <Router>
       <main>
         {user ?
-          <Navbar user={user} /> :
+          <Navbar user={user} setUser={setUser} /> :
           ''
         }
         <Switch>

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-export default function Navbar({ user }) {
+export default function Navbar({ user, setUser }) {
     return (
         <nav className="navbar navbar-dark">
             <div className="container-fluid Navbar-row">
@@ -15,9 +15,20 @@ export default function Navbar({ user }) {
                       <FontAwesomeIcon icon={faPlusCircle} size="3x" color="white" />
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <FontAwesomeIcon icon={faSignOutAlt} size="3x" color="white" />
-                  </li>
+                  {user && (
+                    <li className="nav-item">
+                      <FontAwesomeIcon
+                        icon={faSignOutAlt}
+                        size="3x"
+                        color="white"
+                        cursor="pointer"
+                        onClick={() => {
+                          localStorage.removeItem('user');
+                          setUser(null);
+                        }}
+                      />
+                    </li>
+                  )}
                 </ul>
             </div>
         </nav>
