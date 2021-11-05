@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-export default function NoteForm({ backend }) {
+export default function NoteForm({ backend, setIsNoteCreated }) {
   const [data, setData] = useState({
     title: '',
     description: '',
@@ -115,9 +115,8 @@ export default function NoteForm({ backend }) {
             title: '',
             description: '',
           });
-          setFormAlertText('Note saved successfully');
-          setFormAlertType('success');
-        })
+          setIsNoteCreated(true);
+      })
         .catch(error => {
           setIsFormValidated(false);
           setFormAlertText(error.message);
