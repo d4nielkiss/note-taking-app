@@ -70,6 +70,7 @@ function App() {
               <CreateNote
                 backend={backend}
                 setIsNoteCreated={setIsNoteCreated}
+                user={user}
               />
             }
           </Route>

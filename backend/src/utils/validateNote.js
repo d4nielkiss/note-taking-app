@@ -16,7 +16,11 @@ export default function validateNote(data) {
     }),
     isPinned: Joi.boolean().required().messages({
       'any.required': 'Missing isPinned',
-    })
+    }),
+    authorId: Joi.string().required().messages({
+      'string.empty': 'Missing author ID',
+      'any.required': 'Missing author ID',
+    }),
   });
   return schema.validate(data, { abortEarly: false });
 }

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 const noteSchema = new mongoose.Schema({
   title: {
@@ -17,6 +17,10 @@ const noteSchema = new mongoose.Schema({
   isPinned: {
     type: Boolean,
     required: true,
+  },
+  authorId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
 });
 

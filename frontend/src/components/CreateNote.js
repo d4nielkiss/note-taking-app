@@ -1,7 +1,11 @@
-import Form from './common/NoteForm';
+import NoteForm from './common/NoteForm';
 import '../scss/note.scss';
 
-export default function CreateNote({ backend, setIsNoteCreated }) {
+export default function CreateNote({
+  backend,
+  setIsNoteCreated,
+  user,
+}) {
   return (
     <div className="d-flex justify-content-center">
       <div className="box">
@@ -9,7 +13,11 @@ export default function CreateNote({ backend, setIsNoteCreated }) {
           Add a new note
         </h2>
         <div>
-          <Form backend={backend} setIsNoteCreated={setIsNoteCreated} />
+          <NoteForm
+            backend={backend}
+            setIsNoteCreated={setIsNoteCreated}
+            user={user}
+          />
         </div>
       </div>
     </div>

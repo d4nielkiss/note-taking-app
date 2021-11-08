@@ -1,6 +1,10 @@
 import { useRef, useState } from 'react';
 
-export default function NoteForm({ backend, setIsNoteCreated }) {
+export default function NoteForm({
+  backend,
+  setIsNoteCreated,
+  user
+}) {
   const [data, setData] = useState({
     title: '',
     description: '',
@@ -103,6 +107,7 @@ export default function NoteForm({ backend, setIsNoteCreated }) {
           description: data.description,
           date: new Date(),
           isPinned: false,
+          authorId: user.id,
         }),
       })
         .then(async res => {
