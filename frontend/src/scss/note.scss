@@ -12,4 +12,38 @@
   &-isPinned {
     border: 3px solid $darkBlue;
   }
+
+  #edit {
+    margin-right: 1rem;
+    & svg {
+      color: $lightGray;
+      &:hover {
+        color: $darkBlue;
+      }
+    }
+  }
+
+  #delete {
+    & svg {
+      color: $lightGray;
+      &:hover {
+        color: $danger;
+      }
+    }
+  }
+
+  #pin {
+    & svg {
+      color: $lightGray;
+      &:hover {
+        color: $gray;
+      }
+    }
+    & svg[data-ispinned=true] {
+      color: $darkBlue;
+      &:hover {
+        color: $lightBlue;
+      }
+    }
+  }
 }

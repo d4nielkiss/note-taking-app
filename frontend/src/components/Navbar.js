@@ -12,7 +12,12 @@ export default function Navbar({ user, setUser }) {
                 <ul className="navbar-nav flex-row">
                   <li className="nav-item me-5">
                     <Link to="/new">
-                      <FontAwesomeIcon icon={faPlusCircle} size="3x" color="white" />
+                      <FontAwesomeIcon
+                        icon={faPlusCircle}
+                        size="3x"
+                        color="white"
+                        title="Add"
+                      />
                     </Link>
                   </li>
                   {user && (
@@ -21,6 +26,7 @@ export default function Navbar({ user, setUser }) {
                         icon={faSignOutAlt}
                         size="3x"
                         color="white"
+                        title="Exit"
                         cursor="pointer"
                         onClick={() => {
                           localStorage.removeItem('user');
