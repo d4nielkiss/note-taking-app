@@ -34,9 +34,7 @@ function App() {
   }
 
   const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
-  const [isNoteCreated, setIsNoteCreated] = useState(false);
   const backend = `${config.protocol}://${config.host}:${config.port}/${config.route}`;
-
 
   return (
     <Router>
@@ -65,14 +63,10 @@ function App() {
             }
           </Route>
           <Route path="/new">
-            {isNoteCreated ?
-              <Redirect to="/" /> :
-              <CreateNote
-                backend={backend}
-                setIsNoteCreated={setIsNoteCreated}
-                user={user}
-              />
-            }
+            <CreateNote
+              backend={backend}
+              user={user}
+            />
           </Route>
           <Route path="/dashboard">
             <NoteList backend={backend} />

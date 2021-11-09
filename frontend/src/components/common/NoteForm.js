@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
+import { useHistory } from 'react-router';
 
 export default function NoteForm({
   backend,
-  setIsNoteCreated,
-  user
+  user,
 }) {
   const [data, setData] = useState({
     title: '',
@@ -14,6 +14,8 @@ export default function NoteForm({
     title: '',
     description: '',
   });
+
+  let history = useHistory();
 
   const [formAlertText, setFormAlertText] = useState('');
   const [formAlertType, setFormAlertType] = useState('');
@@ -120,7 +122,7 @@ export default function NoteForm({
             title: '',
             description: '',
           });
-          setIsNoteCreated(true);
+          history.push("/");
       })
         .catch(error => {
           setIsFormValidated(false);
