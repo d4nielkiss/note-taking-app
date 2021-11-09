@@ -5,8 +5,10 @@ export default function NoteList({ backend, user }) {
   const [notes, setNotes] = useState([]);
   const [error, setError] = useState(null);
 
+  const id = user.id;
+
   function fetchNoteQuery() {
-    fetch(`${backend}/note`)
+    fetch(`${backend}/user/${id}`)
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -22,7 +24,7 @@ export default function NoteList({ backend, user }) {
   }
 
   useEffect(() => {
-    fetch(`${backend}/note`)
+    fetch(`${backend}/user/${id}`)
         .then(res => {
           if (res.ok) {
             return res.json();
@@ -35,7 +37,7 @@ export default function NoteList({ backend, user }) {
         .catch(err => {
           setError(err.message);
         });
-  }, [backend]);
+  }, [backend, id]);
 
   function fetchIsPinnedChange(status, id) {
     fetch(`${backend}/note/${id}`, {
