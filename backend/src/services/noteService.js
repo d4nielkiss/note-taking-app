@@ -38,5 +38,17 @@ export const noteService = {
       console.error(err.message);
       return { status: 500, error: err };
     }
-  }
+  },
+  async getNoteById(id) {
+    try {
+      const note = await Note.findById(id);
+      if (!note) {
+        return { status: 400, error: 'Note not found' };
+      }
+      return { status: 200, note };
+    } catch (err) {
+      console.error(err.message);
+      return { status: 500, error: err };
+    }
+  },
 };

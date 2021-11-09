@@ -10,4 +10,9 @@ export const noteController = {
     const updatedNote = await noteService.updateNote(id, req.body);
     res.status(updatedNote.status).json(updatedNote);
   },
+  async apiGetNoteById(req, res) {
+    const { id } = req.params;
+    const note = await noteService.getNoteById(id);
+    res.status(note.status).json(note);
+  },
 };
