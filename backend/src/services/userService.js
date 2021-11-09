@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User';
 import validateUser from '../utils/validateUser';
 import { config } from '../config';
+import Note from '../models/Note';
 
 export const userService = {
   async createUser(data) {
@@ -64,6 +65,19 @@ export const userService = {
           token,
         },
       };
+    } catch (err) {
+      console.error(err.message);
+      return { status: 500, error: err };
+    }
+  },
+  async getNotesByUser(id) {
+    try {
+      const notes = await Note.find({ authorId: id }).sort({ isPinned: -1, date: -1 });
+      if (notes.length === 0) {
+        return { status: 400, error: 'Notes not found' };
+      }
+
+      return { status: 200, notes };
     } catch (err) {
       console.error(err.message);
       return { status: 500, error: err };
