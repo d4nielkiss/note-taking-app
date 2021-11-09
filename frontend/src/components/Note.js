@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 import '../scss/note.scss';
+import { Link } from 'react-router-dom';
 
 export default function Note({
   title,
@@ -38,13 +39,15 @@ export default function Note({
       <div className="d-flex justify-content-between">
         <small>{dateTime}</small>
         <div className="action-icons d-flex">
-          <div id="edit">
-            <FontAwesomeIcon
-              icon={faEdit}
-              cursor="pointer"
-              title="Edit"
-            />
-          </div>
+          <Link to={`/note/${id}`}>
+            <div id="edit">
+              <FontAwesomeIcon
+                icon={faEdit}
+                cursor="pointer"
+                title="Edit"
+              />
+            </div>
+          </Link>
           <div id="delete">
             <FontAwesomeIcon
               icon={faTrash}

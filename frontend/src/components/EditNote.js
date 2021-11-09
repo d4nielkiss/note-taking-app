@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import NoteForm from './common/NoteForm';
 import '../scss/note.scss';
 
@@ -11,8 +11,8 @@ export default function CreateNote({
     <div className="d-flex justify-content-center">
       <div className="box">
         <h2 className="mb-3">
-          <FontAwesomeIcon className="me-2" icon={faPlus} />
-          Add a new note
+          <FontAwesomeIcon className="me-2" icon={faPen} />
+          Edit note
         </h2>
         <div>
           <NoteForm

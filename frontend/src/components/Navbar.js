@@ -11,7 +11,7 @@ export default function Navbar({ user, setUser }) {
                 </Link>
                 <ul className="navbar-nav flex-row">
                   <li className="nav-item me-5">
-                    <Link to="/new">
+                    <Link to="/note">
                       <FontAwesomeIcon
                         icon={faPlusCircle}
                         size="3x"

@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import CreateNote from './CreateNote';
+import EditNote from './EditNote';
 import NoteList from './NoteList';
 import Register from '../components/auth/Register';
 import Login from '../components/auth/Login';
@@ -62,7 +63,13 @@ function App() {
               />
             }
           </Route>
-          <Route path="/new">
+          <Route path="/note/:id">
+            <EditNote
+              backend={backend}
+              user={user}
+            />
+          </Route>
+          <Route path="/note">
             <CreateNote
               backend={backend}
               user={user}
