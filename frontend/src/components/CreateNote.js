@@ -18,6 +18,7 @@ export default function CreateNote({
           <NoteForm
             backend={backend}
             user={user}
+            type="new"
           />
         </div>
       </div>

@@ -4,11 +4,20 @@ import { useHistory } from 'react-router';
 export default function NoteForm({
   backend,
   user,
+  type,
+  note,
 }) {
-  const [data, setData] = useState({
-    title: '',
-    description: '',
-  });
+  const [data, setData] = useState(
+    type === 'new'
+      ? {
+          title: '',
+          description: '',
+        }
+      : {
+          title: note.title,
+          description: note.description,
+        }  
+  );
 
   const [errors, setErrors] = useState({
     title: '',
