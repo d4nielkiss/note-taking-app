@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faThumbtack,
@@ -5,8 +6,8 @@ import {
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
+import DeleteModal from './common/DeleteModal';
 import '../scss/note.scss';
-import { Link } from 'react-router-dom';
 
 export default function Note({
   title,
@@ -15,7 +16,10 @@ export default function Note({
   isPinned,
   id,
   handleThumbtackClick,
+  setIdToBeDeleted,
+  handleNoteDeletion,
 }) {
+
   const dateTime = moment(date).format('MMMM Do YYYY, h:mm:ss a');
 
   return (
@@ -50,13 +54,22 @@ export default function Note({
           </Link>
           <div id="delete">
             <FontAwesomeIcon
+              onClick={setIdToBeDeleted}
               icon={faTrash}
               cursor="pointer"
               title="Delete"
+              data-bs-target="#myModal"
+              data-bs-toggle="modal"
+              data-id={id}
             />
           </div>
         </div>
       </div>
+      <DeleteModal
+        title={title}
+        id={id}
+        deleteOnClick={handleNoteDeletion}
+      />
     </div>
   );
 };

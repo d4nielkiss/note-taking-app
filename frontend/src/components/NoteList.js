@@ -4,6 +4,7 @@ import Note from './Note';
 export default function NoteList({ backend, user }) {
   const [notes, setNotes] = useState([]);
   const [error, setError] = useState(null);
+  const [idToDelete, setIdToDelete] = useState(null);
 
   const id = user.id;
 
@@ -59,6 +60,24 @@ export default function NoteList({ backend, user }) {
       });
   }
 
+  function setIdToBeDeleted(e) {
+    const id = e.currentTarget.dataset.id;
+    setIdToDelete(id);
+  }
+
+  function handleNoteDeletion() {
+    fetch(`${backend}/note/${idToDelete}`, {
+      method: 'DELETE',
+    })
+    .then((res) => {
+      res.json();
+      fetchNoteQuery();
+    })
+    .catch((err) => {
+      setError(err.message);
+    })
+  }
+
   function handleThumbtackClick(e) {
     const id = e.currentTarget.dataset.id;
     let pinnedUpdateTo = false;
@@ -81,6 +100,8 @@ export default function NoteList({ backend, user }) {
               date={note.date}
               isPinned={note.isPinned}
               handleThumbtackClick={handleThumbtackClick}
+              setIdToBeDeleted={setIdToBeDeleted}
+              handleNoteDeletion={handleNoteDeletion}
             />
           )
         })
