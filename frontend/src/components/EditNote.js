@@ -43,6 +43,7 @@ export default function EditNote({
               user={user}
               type="edit"
               note={note}
+              id={id}
             />
           </div>
         )}

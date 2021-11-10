@@ -6,6 +6,7 @@ export default function NoteForm({
   user,
   type,
   note,
+  id,
 }) {
   const [data, setData] = useState(
     type === 'new'
@@ -106,38 +107,73 @@ export default function NoteForm({
     e.preventDefault();
     const isFormValid = validateForm();
     if (isFormValid) {
-      fetch(`${backend}/note`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          title: data.title,
-          description: data.description,
-          date: new Date(),
-          isPinned: false,
-          authorId: user.id,
-        }),
-      })
-        .then(async res => {
-          if (res.status === 400) {
-            const response = await res.json();
-            throw new Error(response?.error);
-          }
-          e.target.reset();
-          setData({
-            title: '',
-            description: '',
-          });
-          history.push("/");
-      })
-        .catch(error => {
-          setIsFormValidated(false);
-          setFormAlertText(error.message);
-          setFormAlertType('danger');
-        })      
+      if (type === 'new') {
+        fetch(`${backend}/note`, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            title: data.title,
+            description: data.description,
+            date: new Date(),
+            isPinned: false,
+            authorId: user.id,
+          }),
+        })
+          .then(async res => {
+            if (res.status === 400) {
+              const response = await res.json();
+              throw new Error(response?.error);
+            }
+            e.target.reset();
+            setData({
+              title: '',
+              description: '',
+            });
+            history.push("/");
+        })
+          .catch(error => {
+            setIsFormValidated(false);
+            setFormAlertText(error.message);
+            setFormAlertType('danger');
+          })      
+      } else if (type === 'edit') {
+          fetch(`${backend}/note/${id}`, {
+            method: 'PUT',
+            mode: 'cors',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              title: data.title,
+              description: data.description,
+              date: new Date(),
+              isPinned: false,
+              authorId: user.id,
+            }),
+          })
+            .then(async res => {
+              if (res.status === 400) {
+                const response = await res.json();
+                throw new Error(response?.error);
+              }
+              e.target.reset();
+              setData({
+                title: '',
+                description: '',
+              });
+              history.push("/");
+          })
+            .catch(error => {
+              setIsFormValidated(false);
+              setFormAlertText(error.message);
+              setFormAlertType('danger');
+            })      
+      }
     }
     setFormAlertText('');
     setFormAlertType('');
