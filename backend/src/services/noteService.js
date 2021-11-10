@@ -25,11 +25,27 @@ export const noteService = {
   },
   async updateNote(id, data) {
     try {
-      const updatedNote = await Note.findOneAndUpdate(
-        { _id: id },
-        { $set: { isPinned: data.isPinned } },
-        { new: true },
-      );
+      let updatedNote;
+      if (data.title) {
+        updatedNote = await Note.findOneAndUpdate(
+          { _id: id },
+          { $set: { 
+            title: data.title,
+            description: data.description,
+            date: data.date,
+          } },
+          { new: true },
+        );
+      } else {
+        updatedNote = await Note.findOneAndUpdate(
+          { _id: id },
+          { $set: { 
+            isPinned: data.isPinned,
+            
+          } },
+          { new: true },
+        );
+      }
       if (!updatedNote) {
         return { status: 400, error: 'Note not found' };
       }
