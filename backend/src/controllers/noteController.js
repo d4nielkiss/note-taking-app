@@ -15,4 +15,9 @@ export const noteController = {
     const note = await noteService.getNoteById(id);
     res.status(note.status).json(note);
   },
+  async apiDeleteNote(req, res) {
+    const { id } = req.params;
+    const deletedNote = await noteService.deleteNote(id);
+    res.status(deletedNote.status).json(deletedNote);
+  },
 };

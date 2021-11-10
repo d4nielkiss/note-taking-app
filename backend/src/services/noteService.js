@@ -67,4 +67,16 @@ export const noteService = {
       return { status: 500, error: err };
     }
   },
+  async deleteNote(id) {
+    try {
+      const deletedNote = await Note.findByIdAndDelete(id);
+      if (!deletedNote) {
+        return { status: 400, error: 'Note not found' };
+      }
+      return { status: 200, deletedNote };
+    } catch (err) {
+      console.error(err.message);
+      return { status: 500, error: err };
+    }
+  },
 };
