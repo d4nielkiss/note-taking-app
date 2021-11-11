@@ -42,28 +42,30 @@ export default function Note({
       <article>{description}</article>
       <div className="d-flex justify-content-between">
         <small>{dateTime}</small>
-        <div className="action-icons d-flex">
-          <Link to={`/note/${id}`}>
-            <div id="edit">
+        {id && (
+          <div className="action-icons d-flex">
+            <Link to={`/note/${id}`}>
+              <div id="edit">
+                <FontAwesomeIcon
+                  icon={faEdit}
+                  cursor="pointer"
+                  title="Edit"
+                />
+              </div>
+            </Link>
+            <div id="delete">
               <FontAwesomeIcon
-                icon={faEdit}
+                onClick={setIdToBeDeleted}
+                icon={faTrash}
                 cursor="pointer"
-                title="Edit"
+                title="Delete"
+                data-bs-target="#myModal"
+                data-bs-toggle="modal"
+                data-id={id}
               />
             </div>
-          </Link>
-          <div id="delete">
-            <FontAwesomeIcon
-              onClick={setIdToBeDeleted}
-              icon={faTrash}
-              cursor="pointer"
-              title="Delete"
-              data-bs-target="#myModal"
-              data-bs-toggle="modal"
-              data-id={id}
-            />
           </div>
-        </div>
+        )}
       </div>
       <DeleteModal
         title={title}

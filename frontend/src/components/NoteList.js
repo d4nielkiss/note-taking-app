@@ -106,6 +106,14 @@ export default function NoteList({ backend, user }) {
           )
         })
       }
+      {notes.length === 0 && (
+        <Note
+          title={`You don't have any notes yet...`}
+          description={`Why not create one? Just click the plus icon above!`}
+          date={Date.now()}
+          isPinned={true}
+        />
+      )}
       {error &&
         <div className={`alert alert-danger`} role="alert">
           {error}
