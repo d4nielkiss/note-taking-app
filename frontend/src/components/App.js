@@ -3,7 +3,6 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { Redirect } from 'react-router';
 import CreateNote from './CreateNote';
 import EditNote from './EditNote';
 import NoteList from './NoteList';
@@ -34,7 +33,6 @@ function App() {
     }
   }
 
-  const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
   const backend = `${config.protocol}://${config.host}:${config.port}/${config.route}`;
 
   return (
@@ -46,22 +44,13 @@ function App() {
         }
         <Switch>
           <Route path="/register">
-            {isRegisterSuccess ?
-              <Redirect to="/login" /> :
-              <Register
-                backend={backend}
-                setIsRegisterSuccess={setIsRegisterSuccess}  
-              />
-            }
+            <Register backend={backend} />
           </Route>
           <Route path="/login">
-            {user ?
-              <Redirect to="/" /> :
-              <Login
-                backend={backend}
-                setUser={setUser}
-              />
-            }
+            <Login
+              backend={backend}
+              setUser={setUser}
+            />
           </Route>
           <Route path="/note/:id">
             <EditNote

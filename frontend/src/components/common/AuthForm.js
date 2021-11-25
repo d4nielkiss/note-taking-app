@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
+import { useHistory } from 'react-router';
 import validator from 'validator';
 import InputFieldSet from './InputFieldSet';
 
 export default function AuthForm({
   backend,
   type,
-  setIsRegisterSuccess,
   setUser,
 }) {
   const [data, setData] = useState({
@@ -21,6 +21,8 @@ export default function AuthForm({
   const [formAlertText, setFormAlertText] = useState('');
   const [formAlertType, setFormAlertType] = useState('');
   const [isFormValidated, setIsFormValidated] = useState(false);
+
+  const history = useHistory();
 
   const errorMessages = {
     required: 'Please fill the field above!',
@@ -145,10 +147,11 @@ export default function AuthForm({
             password: '',
           });
           if (type === 'register') {
-            setIsRegisterSuccess(true);
+            history.push('/login');
           } else {
             localStorage.setItem('user', JSON.stringify(res.user));
             setUser(res.user);
+            history.push('/');
           }
         })
         .catch(error => {
