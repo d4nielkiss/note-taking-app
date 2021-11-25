@@ -27,7 +27,6 @@ services:
       - '5000:5000'
     environment: 
       - PORT=5000
-      - MONGO_URL=mongodb://mongo:27017/note-taking-app
     volumes:
       - /backend/node_modules
       - ./backend:/app
