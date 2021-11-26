@@ -158,9 +158,6 @@ export default function NoteForm({
             body: JSON.stringify({
               title: data.title,
               description: data.description,
-              date: new Date(),
-              isPinned: false,
-              authorId: user.id,
             }),
           })
             .then(async res => {
