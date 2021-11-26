@@ -195,3 +195,37 @@ describe('PUT api/note/id', () => {
     });
   });
 });
+
+describe('DELETE api/note/id', () => {
+  describe('given note id', () => {
+    test('should respond with status code 200 and send back deletedNote', async () => {
+      const noteData = {
+        title: 'The title',
+        description: 'A short description.',
+        date: Date.now(),
+        isPinned: false,
+        authorId: '6107a327b1c3c1003b3b126e',
+      };
+      const note = await Note.create(noteData);
+      const response = await request(app).delete(`/api/note/${note.id}`).send();
+      expect(response.statusCode).toBe(200);
+      expect(response.body.deletedNote).toBeDefined();
+    });
+  });
+
+  describe('given incorrect note id', () => {
+    test('should respond with status code 400 and send back error message', async () => {
+      const noteData = {
+        title: 'The title',
+        description: 'A short description.',
+        date: Date.now(),
+        isPinned: false,
+        authorId: '6107a327b1c3c1003b3b126e',
+      };
+      await Note.create(noteData);
+      const response = await request(app).delete('/api/note/6107a327b1c3c1003b3b126e').send();
+      expect(response.statusCode).toBe(400);
+      expect(response.body.error).toBe('Note not found');
+    });
+  });
+});
