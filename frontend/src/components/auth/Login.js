@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import AuthForm from '../common/AuthForm';
 
 export default function Login({
@@ -17,6 +18,11 @@ export default function Login({
           setLoggedIn={setLoggedIn}
           setUser={setUser}
         />
+        <div className="d-flex justify-content-center mt-5">
+          <small>
+            Don't have an account yet? <Link to="/register">Click here!</Link>
+          </small>
+        </div>
       </div>
     </div>
   );
