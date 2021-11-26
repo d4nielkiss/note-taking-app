@@ -32,7 +32,6 @@ export const noteService = {
           { $set: { 
             title: data.title,
             description: data.description,
-            date: data.date,
           } },
           { new: true },
         );

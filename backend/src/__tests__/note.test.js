@@ -118,3 +118,80 @@ describe('POST api/note', () => {
     });
   });
 })
+
+describe('GET api/note/id', () => {
+  describe('given note id', () => {
+    test('should respond with status code 200 and send back note data', async () => {
+      const noteData = {
+        title: 'The title',
+        description: 'A short description.',
+        date: Date.now(),
+        isPinned: false,
+        authorId: '6107a327b1c3c1003b3b126e',
+      };
+      const note = await Note.create(noteData);
+      const response = await request(app).get(`/api/note/${note.id}`).send();
+      expect(response.statusCode).toBe(200);
+      expect(response.body.note).toBeDefined();
+    });
+  });
+
+  describe('given incorrect note id', () => {
+    test('should respond with status code 400 and send back error message', async () => {
+      const noteData = {
+        title: 'The title',
+        description: 'A short description.',
+        date: Date.now(),
+        isPinned: false,
+        authorId: '6107a327b1c3c1003b3b126e',
+      };
+      await Note.create(noteData);
+      const response = await request(app).get('/api/note/6107a327b1c3c1003b3b126e').send();
+      expect(response.statusCode).toBe(400);
+      expect(response.body.error).toBe('Note not found');
+    });
+  });
+});
+
+describe('PUT api/note/id', () => {
+  describe('given note id', () => {
+    test('should respond with status code 200 and send back updated note', async () => {
+      const noteData = {
+        title: 'The title',
+        description: 'A short description.',
+        date: Date.now(),
+        isPinned: false,
+        authorId: '6107a327b1c3c1003b3b126e',
+      };
+      const note = await Note.create(noteData);
+      const dataToUpdateWith = {
+        title: 'Updated title',
+        description: 'Updated description',
+      };
+      const response = await request(app).put(`/api/note/${note.id}`).send(dataToUpdateWith);
+      expect(response.statusCode).toBe(200);
+      expect(response.body.updatedNote.title).toBe(dataToUpdateWith.title);
+      expect(response.body.updatedNote.description).toBe(dataToUpdateWith.description);
+    });
+  });
+
+  describe('given incorrect note id', () => {
+    test('should respond with status code 400 and send back error message', async () => {
+      const noteData = {
+        title: 'The title',
+        description: 'A short description.',
+        date: Date.now(),
+        isPinned: false,
+        authorId: '6107a327b1c3c1003b3b126e',
+      };
+      await Note.create(noteData);
+      const dataToUpdateWith = {
+        title: 'Updated title',
+        description: 'Updated description',
+      };
+      const response = await request(app).put('/api/note/6107a327b1c3c1003b3b126e').send(dataToUpdateWith);
+      expect(response.statusCode).toBe(400);
+      expect(response.body.error).toBe('Note not found');
+    });
+  });
+});
