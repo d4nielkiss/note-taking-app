@@ -32,7 +32,8 @@ export default function NoteForm({
   const [isFormValidated, setIsFormValidated] = useState(false);
 
   const errorMessages = {
-    required: 'Please fill the field above!',
+    required: 'Please fill the field above',
+    length: 'Cannot be longer than 1000 characters',
   }
 
   function handleInputChange(e) {
@@ -53,6 +54,7 @@ export default function NoteForm({
     },
     description: {
       required: isNotEmpty,
+      length: isNoLongerThan1000,
     },
   }
 
@@ -63,6 +65,10 @@ export default function NoteForm({
 
   function isNotEmpty(value) {
     return value.length > 0;
+  }
+
+  function isNoLongerThan1000(value) {
+    return value.length <= 1000;
   }
 
   function validateInputField(name) {
@@ -81,6 +87,7 @@ export default function NoteForm({
             [name]: errorMessage,
           }));
           references[name].current.setCustomValidity(errorMessage);
+          return isFieldValid;
         }
       }
     }

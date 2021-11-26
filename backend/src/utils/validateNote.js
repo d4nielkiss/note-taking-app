@@ -6,10 +6,10 @@ export default function validateNote(data) {
       'string.empty': 'Missing title',
       'any.required': 'Missing title',
     }),
-    description: Joi.string().required().max(201).messages({
+    description: Joi.string().required().max(1000).messages({
       'any.required': 'Missing description',
       'string.empty': 'Missing description',
-      'string.max': 'Cannot be longer than 200 characters',
+      'string.max': 'Description cannot be longer than 1000 characters',
     }),
     date: Joi.date().required().messages({
       'any.required': 'Missing date',
