@@ -4,11 +4,9 @@ import NoteForm from './common/NoteForm';
 import '../scss/note.scss';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
+import { backend } from '../constants';
 
-export default function EditNote({
-  backend,
-  user,
-}) {
+export default function EditNote() {
   const { id } = useParams();
   const [note, setNote] = useState(null);
   const [error, setError] = useState(null);
@@ -27,7 +25,7 @@ export default function EditNote({
       .catch((err) => {
         setError(err.message);
       })
-  }, [backend, id]);
+  }, [id]);
   
   return (
     <div className="d-flex justify-content-center">
@@ -40,7 +38,6 @@ export default function EditNote({
           <div>
             <NoteForm
               backend={backend}
-              user={user}
               type="edit"
               note={note}
               id={id}

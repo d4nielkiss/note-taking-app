@@ -1,13 +1,13 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import validator from 'validator';
+import { UserContext } from '../../contexts/UserContext';
 import InputFieldSet from './InputFieldSet';
+import { backend } from '../../constants';
 
-export default function AuthForm({
-  backend,
-  type,
-  setUser,
-}) {
+export default function AuthForm({ type }) {
+  const { signIn } = useContext(UserContext);
+
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -150,7 +150,7 @@ export default function AuthForm({
             history.push('/login');
           } else {
             localStorage.setItem('user', JSON.stringify(res.user));
-            setUser(res.user);
+            signIn(res.user);
             history.push('/');
           }
         })

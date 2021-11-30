@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 import Note from './Note';
+import { backend } from '../constants';
 
-export default function NoteList({ backend, user }) {
+export default function NoteList() {
+  const { user } = useContext(UserContext);
+
   const [notes, setNotes] = useState([]);
   const [error, setError] = useState(null);
   const [idToDelete, setIdToDelete] = useState(null);
@@ -38,7 +42,7 @@ export default function NoteList({ backend, user }) {
         .catch(err => {
           setError(err.message);
         });
-  }, [backend, id]);
+  }, [id]);
 
   function fetchIsPinnedChange(status, id) {
     fetch(`${backend}/note/${id}`, {

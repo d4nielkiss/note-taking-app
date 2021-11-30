@@ -3,27 +3,13 @@ import { faCheck, faListUl, faStickyNote, faThumbtack } from '@fortawesome/free-
 import { Link } from 'react-router-dom';
 import '../scss/home.scss';
 
-export default function Home({ user, handleSignOut }) {
+export default function Home() {
   return (
     <div className="Home">
-      
       <header className="box">
-      {user && (
-        <div className="action-line-auth">
-          <Link to="/dashboard">My notes</Link>
-          <button
-            onClick={handleSignOut}
-            className="sign-out"
-          >
-            Sign out
-          </button>
-        </div>
-      )}
-      {!user && (
         <div className="action-line">
           Want to take notes? <Link to="/register">Sign up here.</Link> Already have an account? <Link to="/login">Click here to log in</Link>
         </div>
-      )}
         <div className="d-flex justify-content-between">
           <h1>Note taking app</h1>
           <FontAwesomeIcon icon={faStickyNote} size="4x" />

@@ -3,10 +3,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import NoteForm from './common/NoteForm';
 import '../scss/note.scss';
 
-export default function CreateNote({
-  backend,
-  user,
-}) {
+export default function CreateNote() {
   return (
     <div className="d-flex justify-content-center">
       <div className="box">
@@ -15,11 +12,7 @@ export default function CreateNote({
           Add a new note
         </h2>
         <div>
-          <NoteForm
-            backend={backend}
-            user={user}
-            type="new"
-          />
+          <NoteForm type="new" />
         </div>
       </div>
     </div>

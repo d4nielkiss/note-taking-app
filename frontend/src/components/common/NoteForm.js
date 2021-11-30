@@ -1,13 +1,15 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
+import { UserContext } from '../../contexts/UserContext';
+import { backend } from '../../constants';
 
 export default function NoteForm({
-  backend,
-  user,
   type,
   note,
   id,
 }) {
+  const { user } = useContext(UserContext);
+
   const [data, setData] = useState(
     type === 'new'
       ? {

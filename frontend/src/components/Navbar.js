@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 
-export default function Navbar({ user, setUser }) {
+export default function Navbar() {
+  const { user, signOut } = useContext(UserContext);
+
     return (
         <nav className="navbar navbar-dark">
             <div className="container-fluid Navbar-row">
@@ -28,10 +32,7 @@ export default function Navbar({ user, setUser }) {
                         color="white"
                         title="Exit"
                         cursor="pointer"
-                        onClick={() => {
-                          localStorage.removeItem('user');
-                          setUser(null);
-                        }}
+                        onClick={() => signOut()}
                       />
                     </li>
                   )}

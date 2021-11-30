@@ -3,74 +3,43 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 import CreateNote from './CreateNote';
 import EditNote from './EditNote';
 import NoteList from './NoteList';
 import Register from '../components/auth/Register';
 import Login from '../components/auth/Login';
 import Home from './Home';
-import config from '../config';
-import { useState } from 'react';
 import Navbar from './Navbar';
 
 function App() {
-  const [user, setUser] = useState(getUser());
-
-  function getUser() {
-    const storedUser = localStorage.getItem('user');
-    if (!storedUser) {
-      return null;
-    } else {
-      return JSON.parse(storedUser);
-    }
-  }
-
-  function handleSignOut() {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      localStorage.removeItem('user');
-      setUser(null);
-    }
-  }
-
-  const backend = `${config.protocol}://${config.host}:${config.port}/${config.route}`;
+  const { user } = useContext(UserContext);
 
   return (
     <Router>
       <main>
-        {user ?
-          <Navbar user={user} setUser={setUser} /> :
-          ''
-        }
+        {user && <Navbar />}
         <Switch>
           <Route path="/register">
-            <Register backend={backend} />
+            <Register />
           </Route>
           <Route path="/login">
-            <Login
-              backend={backend}
-              setUser={setUser}
-            />
+            <Login />
           </Route>
           <Route path="/note/:id">
-            <EditNote
-              backend={backend}
-              user={user}
-            />
+            <EditNote />
           </Route>
           <Route path="/note">
-            <CreateNote
-              backend={backend}
-              user={user}
-            />
+            <CreateNote />
           </Route>
           <Route path="/dashboard">
-            <NoteList backend={backend} />
+            <NoteList />
           </Route>
           <Route path="/">
             {user ? 
-              <NoteList backend={backend} user={user} /> :
-              <Home user={user} handleSignOut={handleSignOut} />
+              <NoteList /> :
+              <Home />
             }
           </Route>
         </Switch>
