@@ -4,7 +4,12 @@ import { noteController, userController } from '../controllers';
 
 const router = express.Router();
 
-router.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  optionSuccessStatus: 200,
+}
+
+router.use(cors(corsOptions));
 router.use(express.json());
 
 router.post('/note', noteController.apiCreateNote);

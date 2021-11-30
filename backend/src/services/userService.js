@@ -73,10 +73,6 @@ export const userService = {
   async getNotesByUser(id) {
     try {
       const notes = await Note.find({ authorId: id }).sort({ isPinned: -1, date: -1 });
-      if (notes.length === 0) {
-        return { status: 400, error: 'Notes not found' };
-      }
-
       return { status: 200, notes };
     } catch (err) {
       console.error(err.message);
